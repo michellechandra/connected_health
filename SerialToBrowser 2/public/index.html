@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="height=device-height,width=device-width">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+
+	<script>
+		var labelTemp, labelHumidity, labelPollution, labelPollen, labelRating, labelTempIndoor, labelHumidityIndoor, labelPollutionIndoor, labelDustIndoor, labelRatingIndoor,serverResponse;	// UI elements
+		//var variable = "seiya";
+		
+		function setup() {
+
+			// outdoor modul labels	
+			labelTemp = createSpan("60");	// the label 
+			labelTemp.position(270,527);		// position it
+			labelTemp.style("color", "#FFFFFF");	
+			labelTemp.style("font-family", "Gill Sans, sans-serif");
+			labelTemp.style("font-size", "38px");  
+
+			labelHumidity = createSpan("40%");	// the label 
+			labelHumidity.position(225,587);		// position it
+			labelHumidity.style("color", "#FFFFFF");	
+			labelHumidity.style("font-family", "Gill Sans, sans-serif");
+			labelHumidity.style("font-size", "38px");
+
+  			labelPollution = createSpan("Low");	// the label 
+			labelPollution.position(215,642);		// position it
+			labelPollution.style("color", "#FFFFFF");	
+			labelPollution.style("font-family", "Gill Sans, sans-serif");
+			labelPollution.style("font-size", "38px");
+
+  			labelPollen = createSpan("Low");	// the label 
+			labelPollen.position(260,695);		// position it
+			labelPollen.style("color", "#FFFFFF");	
+			labelPollen.style("font-family", "Gill Sans, sans-serif");
+			labelPollen.style("font-size", "38px");
+
+  			labelRating = createSpan("8");	// the label 
+			labelRating.position(230,265);		// position it
+			labelRating.style("color", "#FFFFFF");	
+			labelRating.style("font-family", "Gill Sans, sans-serif");
+			labelRating.style("font-size", "110px");
+
+
+			// indoor modul labels	
+			labelTempIndoor = createSpan("60");	// the label 
+			labelTempIndoor.position(770,527);		// position it
+			labelTempIndoor.style("color", "#FFFFFF");	
+			labelTempIndoor.style("font-family", "Gill Sans, sans-serif");
+			labelTempIndoor.style("font-size", "38px");  
+
+			labelHumidityIndoor = createSpan("40%");	// the label 
+			labelHumidityIndoor.position(725,587);		// position it
+			labelHumidityIndoor.style("color", "#FFFFFF");	
+			labelHumidityIndoor.style("font-family", "Gill Sans, sans-serif");
+			labelHumidityIndoor.style("font-size", "38px");
+
+  			labelPollutionIndoor = createSpan("Low");	// the label 
+			labelPollutionIndoor.position(745,643);		// position it
+			labelPollutionIndoor.style("color", "#FFFFFF");	
+			labelPollutionIndoor.style("font-family", "Gill Sans, sans-serif");
+			labelPollutionIndoor.style("font-size", "38px");
+
+  			labelDustIndoor = createSpan();	// the label 
+			labelDustIndoor.position(650,695);		// position it
+			labelDustIndoor.style("color", "#FFFFFF");	
+			labelDustIndoor.style("font-family", "Gill Sans, sans-serif");
+			labelDustIndoor.style("font-size", "38px");
+
+  			labelRatingIndoor = createSpan("8");	// the label 
+			labelRatingIndoor.position(745,265);		// position it
+			labelRatingIndoor.style("color", "#FFFFFF");	
+			labelRatingIndoor.style("font-family", "Gill Sans, sans-serif");
+			labelRatingIndoor.style("font-size", "110px");
+
+			//serverResponse = createSpan();	// create a div for server responses
+			//serverResponse.position(label.width + 15, 20);		// position it
+			getData(0);								// make a request back to the server
+		}
+		
+		// this function makes a call to the server:
+  		function getData(channel) {
+  			httpGet('/device/' + channel, update);
+  		}
+  		
+  		// update the page when the server responds:
+  		function update(data) {
+	  		labelDustIndoor.html(data.voltage);		// put the response in the span
+	  		getData(0);						// make another call to the server
+  		}
+  		
+ 		</script>
+	</head>
+	<body>
+		<div id="homeimage">
+			<img src="home.png"></img>
+		</div>
+	</body>
+</html>

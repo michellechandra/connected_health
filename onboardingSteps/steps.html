@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="height=device-height,width=device-width">
+		<style type="text/css" media="screen, print, projection">
+
+	#stepone {
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	#steptwo {
+		display: none;
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	#stepthree {
+		display: none;
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	#stepfour {
+		display: none;
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+    #movetosteptwo a {
+    	position: absolute;
+    	font-size: 20px;
+    	font-family: Helvetica, sans-serif;
+    	z-index: 100;
+    	color: #FFF;
+		padding-left: 820px;
+		padding-top: 720px;
+    }
+
+    #movetostepthree  {
+    	display:none;
+    	position: absolute;
+    	font-size: 20px;
+    	font-family: Helvetica, sans-serif;
+    	z-index: 100;
+    	color: #FFF;
+		padding-left: 820px;
+		padding-top: 720px;
+    }
+
+    #movetostepthree a {
+    	color: #FFF;
+    }
+
+    #movetostepfour  {
+    	display:none;
+    	position: absolute;
+    	font-size: 20px;
+    	font-family: Helvetica, sans-serif;
+    	z-index: 100;
+    	color: #FFF;
+		padding-left: 820px;
+		padding-top: 720px;
+    }
+
+
+    #movetostepfour a {
+    	color: #FFF;
+    }
+
+
+
+		</style>
+	</head>
+	<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+	<script>
+
+	$( document ).ready(function(){
+
+	$('#movetosteptwo').on("click", function() {
+		$('#steptwo').show();
+		$('#movetostepthree').show();
+		$('#movetosteptwo').hide();
+	});
+
+	$('#movetostepthree').on("click", function() {
+		$('#stepthree').show();
+		$('#movetostepfour').show();
+		$('#movetostepthree').hide();
+	});
+
+	$('#movetostepfour').on("click", function() {
+		$('#stepfour').show();
+		$('#movetostepfour').hide();
+	});
+
+	});
+
+	</script>
+
+		<div id="stepone">
+			<img src="step1.png"></img> 
+
+				</div>
+			<div id="movetosteptwo" title="close"><a href="#">Move to Step Two</a></div>
+
+		<div id="steptwo">
+			<img src="step2.png"></img>
+		</div>
+			<div id="movetostepthree" title="close"><a href="#">Move to Step Three</a></div>
+
+		<div id="stepthree">
+			<img src="step3.png"></img>
+		</div>
+			<div id="movetostepfour" title="close"><a href="#">Move to Step Four</a></div>
+
+
+		<div id="stepfour">
+			<img src="step4.png"></img>
+		</div>
+
+	</body>
+</html>
