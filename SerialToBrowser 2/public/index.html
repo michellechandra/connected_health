@@ -2,36 +2,69 @@
 <html>
 	<head>
 		<meta name="viewport" content="height=device-height,width=device-width">
+
+	<style type="text/css" media="screen, print, projection">
+
+	#alerts {
+		position: absolute;
+		padding-left: 900px;
+		padding-top: 24px;
+	}
+
+	#alerts a {
+		text-decoration: none;
+		color: gray;
+		font-family: sans-serif;
+		font-size: 24px;
+	}
+
+	#homeimage {
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+	}
+
+	#alertspage {
+		display:none;
+		width: 100%;
+		height: 100%;
+		min-height: 100%; /*could be 1400px or something*/
+	}
+
+
+	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
 	<script>
-		var labelTemp, labelHumidity, labelPollution, labelPollen, labelRating, labelTempIndoor, labelHumidityIndoor, labelPollutionIndoor, labelDustIndoor, labelRatingIndoor,serverResponse;	// UI elements
-		//var variable = "seiya";
+		var labelTemp, labelHumidity, labelPollution, labelPollen, labelRating, labelTempIndoor, labelHumidityIndoor, labelPollutionIndoor, labelDustIndoor, labelRatingIndoor, serverResponse;	// UI elements
 		
 		function setup() {
 
 			// outdoor modul labels	
 			labelTemp = createSpan("60");	// the label 
-			labelTemp.position(270,527);		// position it
+			labelTemp.position(270,537);		// position it
 			labelTemp.style("color", "#FFFFFF");	
 			labelTemp.style("font-family", "Gill Sans, sans-serif");
 			labelTemp.style("font-size", "38px");  
 
 			labelHumidity = createSpan("40%");	// the label 
-			labelHumidity.position(225,587);		// position it
+			labelHumidity.position(225,597);		// position it
 			labelHumidity.style("color", "#FFFFFF");	
 			labelHumidity.style("font-family", "Gill Sans, sans-serif");
 			labelHumidity.style("font-size", "38px");
 
   			labelPollution = createSpan("Low");	// the label 
-			labelPollution.position(215,642);		// position it
+			labelPollution.position(215,652);		// position it
 			labelPollution.style("color", "#FFFFFF");	
 			labelPollution.style("font-family", "Gill Sans, sans-serif");
 			labelPollution.style("font-size", "38px");
 
   			labelPollen = createSpan("Low");	// the label 
-			labelPollen.position(260,695);		// position it
+			labelPollen.position(315,705);		// position it
 			labelPollen.style("color", "#FFFFFF");	
 			labelPollen.style("font-family", "Gill Sans, sans-serif");
 			labelPollen.style("font-size", "38px");
@@ -45,30 +78,30 @@
 
 			// indoor modul labels	
 			labelTempIndoor = createSpan("60");	// the label 
-			labelTempIndoor.position(770,527);		// position it
+			labelTempIndoor.position(780,537);		// position it
 			labelTempIndoor.style("color", "#FFFFFF");	
 			labelTempIndoor.style("font-family", "Gill Sans, sans-serif");
 			labelTempIndoor.style("font-size", "38px");  
 
 			labelHumidityIndoor = createSpan("40%");	// the label 
-			labelHumidityIndoor.position(725,587);		// position it
+			labelHumidityIndoor.position(725,597);		// position it
 			labelHumidityIndoor.style("color", "#FFFFFF");	
 			labelHumidityIndoor.style("font-family", "Gill Sans, sans-serif");
 			labelHumidityIndoor.style("font-size", "38px");
 
   			labelPollutionIndoor = createSpan("Low");	// the label 
-			labelPollutionIndoor.position(745,643);		// position it
+			labelPollutionIndoor.position(745,653);		// position it
 			labelPollutionIndoor.style("color", "#FFFFFF");	
 			labelPollutionIndoor.style("font-family", "Gill Sans, sans-serif");
 			labelPollutionIndoor.style("font-size", "38px");
 
-  			labelDustIndoor = createSpan();	// the label 
-			labelDustIndoor.position(650,695);		// position it
+  			labelDustIndoor = createSpan("Low");	// the label 
+			labelDustIndoor.position(850,705);		// position it
 			labelDustIndoor.style("color", "#FFFFFF");	
 			labelDustIndoor.style("font-family", "Gill Sans, sans-serif");
 			labelDustIndoor.style("font-size", "38px");
 
-  			labelRatingIndoor = createSpan("8");	// the label 
+  			labelRatingIndoor = createSpan("6");	// the label 
 			labelRatingIndoor.position(745,265);		// position it
 			labelRatingIndoor.style("color", "#FFFFFF");	
 			labelRatingIndoor.style("font-family", "Gill Sans, sans-serif");
@@ -76,7 +109,7 @@
 
 			//serverResponse = createSpan();	// create a div for server responses
 			//serverResponse.position(label.width + 15, 20);		// position it
-			getData(0);								// make a request back to the server
+			getData(8);								// make a request back to the server
 		}
 		
 		// this function makes a call to the server:
@@ -86,15 +119,48 @@
   		
   		// update the page when the server responds:
   		function update(data) {
-	  		labelDustIndoor.html(data.voltage);		// put the response in the span
-	  		getData(0);						// make another call to the server
+	  		labelDustIndoor.html(data);		// put the response in the span
+	  		getData(8);							// make another call to the server
   		}
+
+  		setInterval(function(){
+  			xmlhttp = new XMLHttpRequest();
+
+  			xmlhttp.onreadystatechange=function(){
+				if (xmlhttp.readyState==4 && xmlhttp.status==200){
+					var data = JSON.parse(xmlhttp.responseText);
+					console.log(data.voltage);
+
+					if (data.voltage < 1.7){
+						labelDustIndoor.html("Good");	
+					} else {
+						labelDustIndoor.html("Poor");
+					}
+					//labelDustIndoor.html(data.voltage);	
+					labelHumidityIndoor.html(data.humidity);
+					labelTempIndoor.html(data.temperature);
+				}
+			}
+
+  			xmlhttp.open("GET","./device",true);
+
+			xmlhttp.send();
+
+  		},5000);
   		
  		</script>
+
+	<script>
+
+
+	</script>
 	</head>
 	<body>
+		
+		<div id="alerts"><a href="alerts.html">alerts</a></div>
 		<div id="homeimage">
 			<img src="home.png"></img>
 		</div>
+
 	</body>
 </html>

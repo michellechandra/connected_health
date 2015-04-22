@@ -20,9 +20,9 @@
 var express = require('express');			// include express.js
 var app = express();								// a local instance of it
 
-var serialport = require("serialport");	// include the serialport library
-var SerialPort  = serialport.SerialPort;	// make a local instance of serial
-var portName = process.argv[2];				// get the port name from the command line
+var serialport = require("serialport"),	// include the serialport library
+	SerialPort  = serialport.SerialPort,	// make a local instance of serial
+	portName = process.argv[2];				// get the port name from the command line
 
 app.use(express.static('public'));			// use the /public directory for static files
 	
@@ -32,16 +32,6 @@ var myPort = new SerialPort(portName, {
 	// look for return and newline at the end of each data packet:
 	parser: serialport.parsers.readline("\r\n") 
 });
-
-// when you get a response from the serial port, 
-//write it out to the client: 
-
-var arduinoStuff = '';
-myPort.on('data', function(data) {
-	//response(data);
-	console.log(data);
-	arduinoStuff = data;
-});	
 
 // this runs after the server successfully starts:
 function serverStart() {
@@ -64,13 +54,26 @@ function serveFiles(request, response) {
 // get an analog reading from the serial port.
 // This is a callback function for when the client requests /device/channel:
 function getSensorReading(request, response) {
- response.send(arduinoStuff);
+	// the parameter after /device/ is the channel number:
+	var channel = request.params.channel;  
+	console.log("getting channel: "+ channel + "...");
+	
+	// send the channel number out the serial port 
+	//and wait for a response:
+	myPort.write(channel, function(){
+		// when you get a response from the serial port, 
+		//write it out to the client: 
+		myPort.on('data', function(data) {
+			// send the data and close the connection:
+			response.end(data);
+		});	
+	}); 
 }
 
 // start the server:
-var server = app.listen(8010, serverStart);
+var server = app.listen(8080, serverStart);
 // start the listeners for GET requests:
 app.get('/files/:name', serveFiles);				// GET handler for all static files
-app.get('/device', getSensorReading);	// GET handler for /device
+app.get('/device/:channel', getSensorReading);	// GET handler for /device
 
 
