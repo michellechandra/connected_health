@@ -5,17 +5,58 @@
 
 	<style type="text/css" media="screen, print, projection">
 
+	body {
+		background-color: #EBEBEB;
+	}
+
+	#menubar {
+		position: absolute;
+		width: 1024px;
+		height: 80px;
+		background-color: white;
+	}
+
+	#container {
+		width: 1024px;
+		height: 768px;
+		border-style: solid;
+		border-width: 1px;
+		border-color: black;
+	}
+
+	#logo {
+		position: absolute;
+		padding-left: 24px;
+		padding-top: 0px;
+		color: gray;
+		font-family: Brandon Grotesque, sans-serif;
+		font-size: 50px;
+	}
+
+	#mydata {
+		position: absolute;
+		padding-left: 750px;
+		padding-top: 14px;
+	}
+
+	#mydata a {
+		text-decoration: none;
+		color: gray;
+		font-family: Brandon Grotesque, sans-serif;
+		font-size: 30px;
+	}
+
 	#alerts {
 		position: absolute;
 		padding-left: 900px;
-		padding-top: 24px;
+		padding-top: 14px;
 	}
 
 	#alerts a {
 		text-decoration: none;
 		color: gray;
-		font-family: sans-serif;
-		font-size: 24px;
+		font-family: Brandon Grotesque, sans-serif;
+		font-size: 30px;
 	}
 
 	#homeimage {
@@ -44,68 +85,117 @@
 		
 		function setup() {
 
-			// outdoor modul labels	
+			// outdoor module labels	
+			var temperature = createSpan("Temperature:");
+			temperature.position(123, 537);
+			temperature.style("color", "#4D4D4D");	
+			temperature.style("font-family", "Brandon Grotesque, sans-serif");
+			temperature.style("font-size", "34px");
+
 			labelTemp = createSpan("60");	// the label 
-			labelTemp.position(270,537);		// position it
-			labelTemp.style("color", "#FFFFFF");	
-			labelTemp.style("font-family", "Gill Sans, sans-serif");
-			labelTemp.style("font-size", "38px");  
+			labelTemp.position(320,537);		// position it
+			labelTemp.style("color", "#4D4D4D");	
+			labelTemp.style("font-family", "Brandon Grotesque, sans-serif");
+			labelTemp.style("font-size", "34px"); 
+
+			var humidity = createSpan("Humidity:");
+			humidity.position(123, 597);
+			humidity.style("color", "#4D4D4D");	
+			humidity.style("font-family", "Brandon Grotesque, sans-serif");
+			humidity.style("font-size", "34px"); 
 
 			labelHumidity = createSpan("40%");	// the label 
-			labelHumidity.position(225,597);		// position it
-			labelHumidity.style("color", "#FFFFFF");	
-			labelHumidity.style("font-family", "Gill Sans, sans-serif");
-			labelHumidity.style("font-size", "38px");
+			labelHumidity.position(320,597);		// position it
+			labelHumidity.style("color", "#4D4D4D");	
+			labelHumidity.style("font-family", "Brandon Grotesque, sans-serif");
+			labelHumidity.style("font-size", "34px");
+
+			var pollution = createSpan("Pollution:");
+			pollution.position(123, 652);
+			pollution.style("color", "#4D4D4D");	
+			pollution.style("font-family", "Brandon Grotesque, sans-serif");
+			pollution.style("font-size", "34px"); 
 
   			labelPollution = createSpan("Low");	// the label 
-			labelPollution.position(215,652);		// position it
-			labelPollution.style("color", "#FFFFFF");	
-			labelPollution.style("font-family", "Gill Sans, sans-serif");
-			labelPollution.style("font-size", "38px");
+			labelPollution.position(320,652);		// position it
+			labelPollution.style("color", "#4D4D4D");	
+			labelPollution.style("font-family", "Brandon Grotesque, sans-serif");
+			labelPollution.style("font-size", "34px");
+
+			var pollen = createSpan("Pollen Index:");
+			pollen.position(123, 705);
+			pollen.style("color", "#4D4D4D");	
+			pollen.style("font-family", "Brandon Grotesque, sans-serif");
+			pollen.style("font-size", "34px"); 
 
   			labelPollen = createSpan("Low");	// the label 
-			labelPollen.position(315,705);		// position it
-			labelPollen.style("color", "#FFFFFF");	
-			labelPollen.style("font-family", "Gill Sans, sans-serif");
-			labelPollen.style("font-size", "38px");
+			labelPollen.position(320,705);		// position it
+			labelPollen.style("color", "#4D4D4D");	
+			labelPollen.style("font-family", "Brandon Grotesque, sans-serif");
+			labelPollen.style("font-size", "34px");
 
-  			labelRating = createSpan("8");	// the label 
-			labelRating.position(230,265);		// position it
-			labelRating.style("color", "#FFFFFF");	
-			labelRating.style("font-family", "Gill Sans, sans-serif");
+  			labelRating = createSpan("80%");	// the label 
+			labelRating.position(160,255);		// position it
+			labelRating.style("color", "#4D4D4D");	
+			labelRating.style("font-family", "Brandon Grotesque, sans-serif");
 			labelRating.style("font-size", "110px");
 
 
 			// indoor modul labels	
+			var indoortemp = createSpan("Temperature:");
+			indoortemp.position(632, 537);
+			indoortemp.style("color", "#4D4D4D");	
+			indoortemp.style("font-family", "Brandon Grotesque, sans-serif");
+			indoortemp.style("font-size", "34px"); 
+
 			labelTempIndoor = createSpan("60");	// the label 
-			labelTempIndoor.position(780,537);		// position it
-			labelTempIndoor.style("color", "#FFFFFF");	
-			labelTempIndoor.style("font-family", "Gill Sans, sans-serif");
-			labelTempIndoor.style("font-size", "38px");  
+			labelTempIndoor.position(830,537);		// position it
+			labelTempIndoor.style("color", "#4D4D4D");	
+			labelTempIndoor.style("font-family", "Brandon Grotesque, sans-serif");
+			labelTempIndoor.style("font-size", "34px");
+
+			var indoorhumidity = createSpan("Humidity:");
+			indoorhumidity.position(632, 597);
+			indoorhumidity.style("color", "#4D4D4D");	
+			indoorhumidity.style("font-family", "Brandon Grotesque, sans-serif");
+			indoorhumidity.style("font-size", "34px");   
 
 			labelHumidityIndoor = createSpan("40%");	// the label 
-			labelHumidityIndoor.position(725,597);		// position it
-			labelHumidityIndoor.style("color", "#FFFFFF");	
-			labelHumidityIndoor.style("font-family", "Gill Sans, sans-serif");
-			labelHumidityIndoor.style("font-size", "38px");
+			labelHumidityIndoor.position(830,597);		// position it
+			labelHumidityIndoor.style("color", "#4D4D4D");	
+			labelHumidityIndoor.style("font-family", "Brandon Grotesque, sans-serif");
+			labelHumidityIndoor.style("font-size", "34px");
+
+			var indoorpollution = createSpan("Pollution:");
+			indoorpollution.position(632, 653);
+			indoorpollution.style("color", "#4D4D4D");	
+			indoorpollution.style("font-family", "Brandon Grotesque, sans-serif");
+			indoorpollution.style("font-size", "34px"); 
 
   			labelPollutionIndoor = createSpan("Low");	// the label 
-			labelPollutionIndoor.position(745,653);		// position it
-			labelPollutionIndoor.style("color", "#FFFFFF");	
-			labelPollutionIndoor.style("font-family", "Gill Sans, sans-serif");
-			labelPollutionIndoor.style("font-size", "38px");
+			labelPollutionIndoor.position(830,653);		// position it
+			labelPollutionIndoor.style("color", "#4D4D4D");	
+			labelPollutionIndoor.style("font-family", "Brandon Grotesque, sans-serif");
+			labelPollutionIndoor.style("font-size", "34px");
+
+			var indoorpollen = createSpan("Pollen Index:");
+			indoorpollen.position(632, 705);
+			indoorpollen.style("color", "#4D4D4D");	
+			indoorpollen.style("font-family", "Brandon Grotesque, sans-serif");
+			indoorpollen.style("font-size", "34px"); 
 
   			labelDustIndoor = createSpan("Low");	// the label 
-			labelDustIndoor.position(850,705);		// position it
-			labelDustIndoor.style("color", "#FFFFFF");	
-			labelDustIndoor.style("font-family", "Gill Sans, sans-serif");
-			labelDustIndoor.style("font-size", "38px");
+			labelDustIndoor.position(830,705);		// position it
+			labelDustIndoor.style("color", "#4D4D4D");	
+			labelDustIndoor.style("font-family", "Brandon Grotesque, sans-serif");
+			labelDustIndoor.style("font-size", "34px");
 
-  			labelRatingIndoor = createSpan("6");	// the label 
-			labelRatingIndoor.position(745,265);		// position it
-			labelRatingIndoor.style("color", "#FFFFFF");	
-			labelRatingIndoor.style("font-family", "Gill Sans, sans-serif");
+  			labelRatingIndoor = createSpan("60%");	// the label 
+			labelRatingIndoor.position(675,255);		// position it
+			labelRatingIndoor.style("color", "#4D4D4D");	
+			labelRatingIndoor.style("font-family", "Brandon Grotesque, sans-serif");
 			labelRatingIndoor.style("font-size", "110px");
+
 
 			//serverResponse = createSpan();	// create a div for server responses
 			//serverResponse.position(label.width + 15, 20);		// position it
@@ -156,11 +246,19 @@
 	</script>
 	</head>
 	<body>
-		
-		<div id="alerts"><a href="alerts.html">alerts</a></div>
+
+		<div id="container">
+
+		<div id="menubar"></div>
+			<div id="logo">clear</div>
+			<div id="mydata"><a href="mydata.html">my data</a></div>	
+			<div id="alerts"><a href="alerts.html">alerts</a></div>
+
+
 		<div id="homeimage">
-			<img src="home.png"></img>
+			<img src=""></img>
 		</div>
+	</div>
 
 	</body>
 </html>
