@@ -23,6 +23,7 @@ var app = express();								// a local instance of it
 var serialport = require("serialport");	// include the serialport library
 var SerialPort  = serialport.SerialPort;	// make a local instance of serial
 var portName = process.argv[2];				// get the port name from the command line
+// xbee ports will be different so when run need to use xbee port (node index.js node-serial-port)
 
 app.use(express.static('public'));			// use the /public directory for static files
 	
