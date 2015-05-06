@@ -201,6 +201,7 @@
 			labelPollen.style("font-size", "34px");
 
   			labelRating = createSpan("80%");	// the label 
+  			labelRating.elt.id="thingy";
 			labelRating.position(160,255);		// position it
 			labelRating.style("color", "#4D4D4D");	
 			labelRating.style("font-family", "Brandon Grotesque, sans-serif");
@@ -257,6 +258,7 @@
 			labelDustIndoor.style("font-size", "34px");
 
   			labelRatingIndoor = createSpan("60%");	// the label 
+  			labelRatingIndoor.elt.id="thing";
 			labelRatingIndoor.position(675,255);		// position it
 			labelRatingIndoor.style("color", "#4D4D4D");	
 			labelRatingIndoor.style("font-family", "Brandon Grotesque, sans-serif");
@@ -288,14 +290,51 @@
 					var data = JSON.parse(xmlhttp.responseText);
 					console.log(data.voltage);
 
-					if (data.voltage < 1.7){
-						labelDustIndoor.html("Good");	
+					//data.pollution
+					// air quality sensor
+					// 1 = High
+					// 2 = Moderate
+					// 3 = Low
+					// - 1 
+
+					// low
+					// moderate / medium
+					// high
+					// need the range
+
+					// update the pollution data point
+					if (data.pollution = 1){
+						labelPollutionIndoor.html('High');
+					} else if (data.pollution = 2){
+						labelPollutionIndoor.html("Moderate");
 					} else {
-						labelDustIndoor.html("Poor");
+						labelPollutionIndoor.html("Low");
+					}
+
+					// update circle text with outdoor rating
+					var ratingOutdoor;
+					updateOutdoorRating(ratingOutdoor);
+
+					if (data.voltage < 1.7){
+						labelDustIndoor.html("Low");	
+					} else {
+						labelDustIndoor.html("High");
 					}
 					//labelDustIndoor.html(data.voltage);	
 					labelHumidityIndoor.html(data.humidity);
 					labelTempIndoor.html(data.temperature);
+
+					// update circle text with indoor rating based on data points
+					var ratingIndoor;
+
+					// set the indoor rating based on 
+					if (data.voltage >= 1.7 || data.pollution >=2 || data.humidity <= 30){
+						ratingIndoor = .3;
+					} else {
+						ratingIndoor = .8;
+					}
+
+					updateIndoorRating(ratingIndoor);
 				}
 			}
 
