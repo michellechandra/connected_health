@@ -288,22 +288,9 @@
   			xmlhttp.onreadystatechange=function(){
 				if (xmlhttp.readyState==4 && xmlhttp.status==200){
 					var data = JSON.parse(xmlhttp.responseText);
-					console.log(data.voltage);
-
-					//data.pollution
-					// air quality sensor
-					// 1 = High
-					// 2 = Moderate
-					// 3 = Low
-					// - 1 
-
-					// low
-					// moderate / medium
-					// high
-					// need the range
 
 					// update the pollution data point
-					if (data.pollution = 1){
+					if (data.pollution <= 1){
 						labelPollutionIndoor.html('High');
 					} else if (data.pollution = 2){
 						labelPollutionIndoor.html("Moderate");
@@ -330,11 +317,13 @@
 					// set the indoor rating based on 
 					if (data.voltage >= 1.7 || data.pollution >=2 || data.humidity <= 30){
 						ratingIndoor = .3;
+						updateOutdoorRating(ratingIndoor);
 					} else {
 						ratingIndoor = .8;
+					    updateOutdoorRating(ratingIndoor);
 					}
 
-					updateIndoorRating(ratingIndoor);
+
 				}
 			}
 
@@ -343,6 +332,53 @@
 			xmlhttp.send();
 
   		},5000);
+
+
+
+			window.onload = function onLoad() {
+			    
+			    circle = new ProgressBar.Circle('#progress', {
+			        color: '#674172',
+			        duration: 300,
+			   	    strokeWidth: 3,
+			        trailWidth: 1,
+			        easing: 'easeInOut',
+			        fill: '#aaa'
+			    });
+
+			    circleIndoor = new ProgressBar.Circle('#progressIndoor', {
+			        color: '#1BA29B',
+			        duration: 300,
+			   	    strokeWidth: 3,
+			        trailWidth: 1,
+			        easing: 'easeInOut',
+			        fill: '#aaa'
+			    });
+
+			    //circle.animate(1, function() {
+			        //circle.setText(second);
+			    //});
+			    //circleIndoor.animate(1);
+			};
+
+			var circle;
+			var circleIndoor;
+
+			function updateIndoorRating(number) {
+			    circleIndoor.animate(number, function() {
+			        //console.log('here');
+			        // circle.text.innerHTML = number;
+			        document.getElementById('thingy').innerHTML = number;
+			    });
+			}
+
+			function updateOutdoorRating(number) {
+			circle.animate(number, function(){
+			        //circleIndoor.text(number);
+			        //circle.text.innerHTML = number;
+			        document.getElementById('thing').innerHTML = number;
+			    });
+			}
   		
  		</script>
 
@@ -373,7 +409,7 @@
         <!-- These are probably out dated so you might want to use newest versions -->
         <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
 
-        <script src="main.js"></script>
+ <!--        // <script src="main.js"></script> -->
 
 		<div id="homeimage">
 			<img src=""></img>
