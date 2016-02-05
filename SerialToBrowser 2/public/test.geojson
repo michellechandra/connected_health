@@ -1,0 +1,6 @@
+{ "type": "FeatureCollection", "features": [
+
+{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [-0.1167, 51.5000] }, "properties": {  "urlpubtimedate": "2016-02-04T15:30:00Z", "name": "London, London, City Of, United Kingdom", "url": "http://www.londonlovesbusiness.com/entrepreneurs/famous-entrepreneurs/supercars-million-pound-artworks-and-cornish-pasties-james-constantinou-on-his-life-as-a-posh-pawnbroker/11806.article", "urlsocialimage": ""} }
+
+
+] } 
